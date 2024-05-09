@@ -1,6 +1,5 @@
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.core.Core;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -11,11 +10,11 @@ public class JpgToAll {
 
     public void JpgToJpeg(Mat image,String outputFilePath)
     {
-        Imgcodecs.imwrite(outputFilePath, image);
+        Imgcodecs.imwrite(outputFilePath+".jpeg", image);
     }
     public void JpgToPng(Mat image,String outputFilePath)
     {
-        Imgcodecs.imwrite(outputFilePath, image);
+        Imgcodecs.imwrite(outputFilePath+".png", image);
     }
     public void JpgToPdf(Mat image,String outputFilePath)
     {
@@ -27,7 +26,7 @@ public class JpgToAll {
 
             // Create Document instance
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream(outputFilePath));
+            PdfWriter.getInstance(document, new FileOutputStream(outputFilePath+".pdf"));
             document.open();
 
             // Add image to PDF

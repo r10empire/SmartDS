@@ -2,7 +2,7 @@ import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
 public class ReadImage {
-    public void readimage(){
+    public void getimage(){
         // Path to the image file
         String imagePath = "E:\\sample.jpg";
 
