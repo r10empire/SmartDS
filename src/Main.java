@@ -9,11 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
         ReadImage obj=new ReadImage();
-        //obj.getimage();
-        //Now we will add command to change image from one form to another
-        // Path to the image file
 
-        String imagePath = "E:\\sample.jpg";
+        String imagePath = "E:\\high_resolution.jpg";
         String OutputPathJpg = "C:\\Users\\Rahul\\IdeaProjects\\SmartDS\\TestImage\\JpgToAll\\sample";
         // Read the image
         Mat image = Imgcodecs.imread(imagePath);
@@ -21,9 +18,9 @@ public class Main {
         JpgToAll jpg = new JpgToAll();
         jpg.JpgToJpeg(image,OutputPathJpg);
         jpg.JpgToPng(image,OutputPathJpg);
-        jpg.JpgToPdf(image,OutputPathJpg);
+        jpg.JpgToPdf(imagePath,OutputPathJpg);
 
-        imagePath = "E:\\sampleJpeg.jpeg";
+        imagePath = "E:\\high_resolution.jpg";
         OutputPathJpg = "C:\\Users\\Rahul\\IdeaProjects\\SmartDS\\TestImage\\JpegToAll\\sample";
         image = Imgcodecs.imread(imagePath);
 
@@ -31,6 +28,15 @@ public class Main {
         jpeg.JpegToJpg(image,OutputPathJpg);
         jpeg.JpegToPng(image,OutputPathJpg);
         jpeg.JpegToPdf(imagePath,OutputPathJpg);
+
+        imagePath = "E:\\high_resolution.jpg";
+        OutputPathJpg = "C:\\Users\\Rahul\\IdeaProjects\\SmartDS\\TestImage\\PngToAll\\sample";
+        image = Imgcodecs.imread(imagePath);
+
+        JpegToAll png = new JpegToAll();
+        png.JpegToJpg(image,OutputPathJpg);
+        png.JpegToPng(image,OutputPathJpg);
+        png.JpegToPdf(imagePath,OutputPathJpg);
 
     }
 }

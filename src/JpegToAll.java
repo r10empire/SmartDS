@@ -1,11 +1,4 @@
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.opencv.core.Mat;
@@ -13,8 +6,7 @@ import org.opencv.imgcodecs.Imgcodecs;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.io.FileOutputStream;
-import org.opencv.core.MatOfByte;
+
 
 public class JpegToAll {
 
@@ -26,26 +18,26 @@ public class JpegToAll {
     {
         Imgcodecs.imwrite(outputFilePath+".png", image);
     }
-    public void JpegToPdf(String inputImagePath, String outputPdfPath)
+    public void JpegToPdf(String inputImagePath, String outputFilePath)
     {
         try {
-            BufferedImage image = ImageIO.read(new File(inputImagePath));
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(outputFilePath + ".pdf")); //  Change pdf's name.
 
-            PDDocument document = new PDDocument();
-            PDPage page = new PDPage();
-            document.addPage(page);
+            document.open();
 
-            PDImageXObject pdImage = PDImageXObject.createFromFile(inputImagePath, document);
-            PDPageContentStream contentStream = new PDPageContentStream(document, page);
-            contentStream.drawImage(pdImage, 0, 0, image.getWidth(), image.getHeight());
-            contentStream.close();
+            Image image = Image.getInstance(inputImagePath);  // Change image's name and extension.
 
-            document.save(outputPdfPath+".pdf");
+            float scaler = ((document.getPageSize().getWidth() - document.leftMargin()
+                    - document.rightMargin() - 0) / image.getWidth()) * 100; // 0 means you have no indentation. If you have any, change it.
+            image.scalePercent(scaler);
+            image.setAlignment(Image.ALIGN_CENTER | Image.ALIGN_TOP);
+
+            document.add(image);
             document.close();
-
-            System.out.println("PDF created successfully");
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }

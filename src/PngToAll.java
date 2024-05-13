@@ -6,17 +6,17 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
 import org.opencv.core.MatOfByte;
 
-public class JpgToAll {
+public class PngToAll {
 
-    public void JpgToJpeg(Mat image,String outputFilePath)
+    public void PngToJpeg(Mat image,String outputFilePath)
     {
         Imgcodecs.imwrite(outputFilePath+".jpeg", image);
     }
-    public void JpgToPng(Mat image,String outputFilePath)
+    public void PngToPng(Mat image,String outputFilePath)
     {
         Imgcodecs.imwrite(outputFilePath+".png", image);
     }
-    public void JpgToPdf(String inputImagePath, String outputFilePath)
+    public void PngToPdf(String inputImagePath, String outputFilePath)
     {
         try {
             Document document = new Document();
